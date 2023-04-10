@@ -17,22 +17,22 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.1.1',
+	version='0.0.1',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
 	license='MIT',
 	# Short description of your library 
-	description='Python library for argument and configuration management ',
+	description='Python library for argument and configuration management',
 	# Long description of your library 
 	long_description=long_description,
 	long_description_content_type='text/markdown',
 	# Your name 
-	author='Guillaume Leclerc',
+	author='Aochuan Chen',
 	# Your email 
-	author_email='leclerc@mit.edu',
+	author_email='chenaoch@msu.edu',
 	# Either the link to your github or to your website 
-	url='https://github.com/GuillaumeLeclerc/fastargs',
+	url='https://github.com/Phoveran/fastargs',
 	# Link from which the project can be downloaded 
 	download_url='',
 	# List of keywords 

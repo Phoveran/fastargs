@@ -1,6 +1,6 @@
 import importlib
 from abc import ABC, abstractmethod
-
+import os
 
 class Checker(ABC):
     @abstractmethod
@@ -144,7 +144,42 @@ class ImportedObject(Checker):
     def help(self):
         return "path to python module and an object within"
 
+class File(Checker):
 
+    def check(self, value):
+        if os.path.isfile(value):
+            return value
+        else:
+            raise TypeError()
+
+    def help(self):
+        return "a path to a file"
+
+class Folder(Checker):
+
+    def check(self, value):
+        if os.path.isdir(value):
+            return value
+        else:
+            raise TypeError()
+
+    def help(self):
+        return "a path to a dir"
+
+class ListOfInts(Checker):
+
+    def check(self, value):
+        ints = value.split(',')
+        for id, i in enumerate(ints):
+            try:
+                ints[id] = int(i)
+            except:
+                raise TypeError()
+        return ints
+
+    def help(self):
+        return "a list of ints (separated with comma) or a single int"
+    
 DEFAULT_CHECKERS = {
     int: Int(),
     float: Float(),

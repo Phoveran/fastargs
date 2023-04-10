@@ -77,8 +77,9 @@ or from CLI arguments. For CLI just use:
                 table_content = [['Name', 'Default', 'Constraint', 'Description']]
                 for path in entries:
                     param = self.entries[path]
-                    if not param.section.is_enabled(self):
-                        continue
+                    # need to accept command line input for disabled sections
+                    # if not param.section.is_enabled(self):
+                    #    continue
                     argname = '.'.join(path)
                     # We do not want to show the args since we have our nice table after
                     if argname == 'help' or argname == 'h':
@@ -195,6 +196,17 @@ or from CLI arguments. For CLI just use:
                 recursive_set(result, path, value)
 
         return NestedNamespace(fix_dict(result))
+
+
+    def dump_json(self, path, ignore = []):
+        config_dict = rec_dd()
+        for path in self.entries.keys():
+            if path not in ignore:
+                recursive_set(config_dict, path, self[path])
+        config_dict = fix_dict(config_dict)
+        with open(path, "w") as f:
+            json.dump(config_dict, f)
+
 
     def validate(self, mode='stderr'):
         errors = {}
