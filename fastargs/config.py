@@ -198,13 +198,13 @@ or from CLI arguments. For CLI just use:
         return NestedNamespace(fix_dict(result))
 
 
-    def dump_json(self, path, ignore = []):
+    def dump_json(self, dump_path, ignore = []):
         config_dict = rec_dd()
         for path in self.entries.keys():
             if path not in ignore:
                 recursive_set(config_dict, path, self[path])
         config_dict = fix_dict(config_dict)
-        with open(path, "w") as f:
+        with open(dump_path, "w") as f:
             json.dump(config_dict, f)
 
 
