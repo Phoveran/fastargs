@@ -180,6 +180,16 @@ class ListOfInts(Checker):
     def help(self):
         return "a list of ints (separated with comma) or a single int"
     
+class BoolAsInt(Checker):
+    def check(self, value):
+        if value in [0, 1]:
+            return bool(value)
+        else:
+            raise TypeError()
+
+    def help(self):
+        return "0 or 1"
+
 DEFAULT_CHECKERS = {
     int: Int(),
     float: Float(),
