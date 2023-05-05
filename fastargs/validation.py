@@ -182,10 +182,15 @@ class ListOfInts(Checker):
     
 class BoolAsInt(Checker):
     def check(self, value):
-        if value in [0, 1]:
-            return bool(value)
-        else:
+        try:
+            value = int(value)
+        except:
             raise TypeError()
+        finally:
+            if value in [0, 1]:
+                return bool(value)
+            else:
+                raise TypeError()
 
     def help(self):
         return "0 or 1"
