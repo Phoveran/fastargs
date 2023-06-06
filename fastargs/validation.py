@@ -182,6 +182,8 @@ class ListOfInts(Checker):
                 except:
                     raise TypeError()
             return ints
+        else:
+            raise TypeError()
 
     def help(self):
         return "a list of ints (separated with comma)"
