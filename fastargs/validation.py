@@ -169,16 +169,22 @@ class Folder(Checker):
 class ListOfInts(Checker):
 
     def check(self, value):
-        ints = value.split(',')
-        for id, i in enumerate(ints):
-            try:
-                ints[id] = int(i)
-            except:
-                raise TypeError()
-        return ints
+        if isinstance(value, list):
+            for i in value:
+                if not isinstance(i, int):
+                    raise TypeError()
+            return value
+        elif isinstance(value, str):
+            ints = value.split(',')
+            for id, i in enumerate(ints):
+                try:
+                    ints[id] = int(i)
+                except:
+                    raise TypeError()
+            return ints
 
     def help(self):
-        return "a list of ints (separated with comma) or a single int"
+        return "a list of ints (separated with comma)"
     
 class BoolAsInt(Checker):
     def check(self, value):
