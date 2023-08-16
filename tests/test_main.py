@@ -140,6 +140,16 @@ class TestStringMethods(unittest.TestCase):
         self.assertNotIn('d', all_config)
         self.assertNotIn('c', all_config)
 
+    def test_get_section(self):
+        Section('first.sec', 'test_sec1').params(
+            param=Param(Anything())
+        )
+
+        Section('second.sec', 'test_sec2').params(
+            param=Param(Anything()),
+            notdef=Param(Anything())
+        )
+        print(get_current_config().get_section('first'))
 
 if __name__ == '__main__':
     unittest.main()

@@ -198,6 +198,14 @@ or from CLI arguments. For CLI just use:
         return NestedNamespace(fix_dict(result))
 
 
+    def get_section(self, section):
+        result = {}
+        for path in self.entries.keys():
+            if path[0] == section:
+                result['.'.join(path[1:])] = self[path]
+        return result
+
+
     def dump_json(self, dump_path, ignore = []):
         config_dict = rec_dd()
         for path in self.entries.keys():
