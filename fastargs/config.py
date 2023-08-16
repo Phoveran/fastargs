@@ -200,9 +200,13 @@ or from CLI arguments. For CLI just use:
 
     def get_section(self, section):
         result = {}
+        section = tuple(section.split('.'))
         for path in self.entries.keys():
-            if path[0] == section:
-                result['.'.join(path[1:])] = self[path]
+            for i in range(len(section)):
+                if section[i] != path[i]:
+                    break
+            if i == len(section)-1:
+                result['.'.join(path[i:])] = self[path]
         return result
 
 
