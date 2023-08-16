@@ -202,10 +202,12 @@ or from CLI arguments. For CLI just use:
         result = {}
         section = tuple(section.split('.'))
         for path in self.entries.keys():
-            for i in range(len(section)):
+            i = 0
+            while i < len(section):
                 if section[i] != path[i]:
                     break
-            if i == len(section)-1:
+                i += 1
+            if i == len(section):
                 result['.'.join(path[i:])] = self[path]
         return result
 
