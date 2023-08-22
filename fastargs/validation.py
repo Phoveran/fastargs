@@ -156,9 +156,15 @@ class File(Checker):
         return "a path to a file"
 
 class Folder(Checker):
+    def __init__(self, create_if_non_exist = False) -> None:
+        self.create_if_non_exist = create_if_non_exist
+        super().__init__()
 
     def check(self, value):
         if os.path.isdir(value):
+            return value
+        elif self.create_if_non_exist:
+            os.makedirs(value, exist_ok=False)
             return value
         else:
             raise TypeError()
