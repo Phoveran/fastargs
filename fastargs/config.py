@@ -207,7 +207,7 @@ or from CLI arguments. For CLI just use:
                 if section[i] != path[i]:
                     break
                 i += 1
-            if i == len(section):
+            if i == len(section) and len(path) == i + 1:
                 result['.'.join(path[i:])] = self[path]
         return result
 
