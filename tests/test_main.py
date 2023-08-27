@@ -151,5 +151,16 @@ class TestStringMethods(unittest.TestCase):
         )
         print(get_current_config().get_section('first'))
 
+    def test_dump(self):
+        Section('first.sec', 'test_sec1').params(
+            param=Param(Anything())
+        )
+
+        Section('second.sec', 'test_sec2').params(
+            param=Param(Anything()),
+            notdef=Param(Anything())
+        )
+        get_current_config().get_all_config('test.yaml')
+
 if __name__ == '__main__':
     unittest.main()

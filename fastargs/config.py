@@ -212,15 +212,24 @@ or from CLI arguments. For CLI just use:
         return result
 
 
-    def dump_json(self, dump_path, ignore = []):
+    def get_all_config(self, dump_path=None, ignore = []):
         config_dict = rec_dd()
         for path in self.entries.keys():
             if path not in ignore:
                 recursive_set(config_dict, path, self[path])
         config_dict = fix_dict(config_dict)
-        with open(dump_path, "w") as f:
-            json.dump(config_dict, f)
-
+        if dump_path is not None:
+            if os.path.split(dump_path)[-1].split('.')[-1] == 'json':
+                with open(dump_path, "w") as f:
+                    json.dump(config_dict, f)
+            elif os.path.split(dump_path)[-1].split('.')[-1] in ['yaml', 'yml']:
+                import yaml
+                with open(dump_path, "w") as f:
+                    yaml.dump(config_dict, f)
+            else:
+                raise ValueError("Only support json and yaml format")
+        return config_dict
+    
 
     def validate(self, mode='stderr'):
         errors = {}
