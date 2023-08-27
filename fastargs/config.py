@@ -215,7 +215,7 @@ or from CLI arguments. For CLI just use:
     def get_all_config(self, dump_path=None, ignore = []):
         config_dict = rec_dd()
         for path in self.entries.keys():
-            if path not in ignore:
+            if '.'.join(path) not in ignore:
                 recursive_set(config_dict, path, self[path])
         config_dict = fix_dict(config_dict)
         if dump_path is not None:
