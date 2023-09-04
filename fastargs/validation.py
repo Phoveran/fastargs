@@ -193,6 +193,28 @@ class ListOfInts(Checker):
 
     def help(self):
         return "a list of ints (separated with comma)"
+
+class ListOfFloats(Checker):
+
+    def check(self, value):
+        if isinstance(value, list):
+            for i in value:
+                if not isinstance(i, float):
+                    raise TypeError()
+            return value
+        elif isinstance(value, str):
+            floats = value.split(',')
+            for id, i in enumerate(floats):
+                try:
+                    floats[id] = float(i)
+                except:
+                    raise TypeError()
+            return floats
+        else:
+            raise TypeError()
+
+    def help(self):
+        return "a list of ints (separated with comma)"
     
 class BoolAsInt(Checker):
     def check(self, value):
