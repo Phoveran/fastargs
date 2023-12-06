@@ -140,7 +140,6 @@ class ImportedObject(Checker):
         imported = importlib.import_module(module)
         return getattr(imported, path[-1])
 
-
     def help(self):
         return "path to python module and an object within"
 
@@ -214,7 +213,22 @@ class ListOfFloats(Checker):
             raise TypeError()
 
     def help(self):
-        return "a list of ints (separated with comma)"
+        return "a list of floats (separated with comma)"
+    
+class SubsetOf(OneOf):
+    def check(self, value):
+        if isinstance(value, list):
+            values = value
+        elif isinstance(value, str):
+            values = value.split(',')
+            for i, v in enumerate(values):
+                values[i] = super().check(v)
+        else:
+            raise TypeError(f'Invalid type {type(value)}')
+        return values
+
+    def help(self):
+        return f"a subset of [{', '.join([str(x) for x in self.possible_values])}], separated with comma"
     
 class BoolAsInt(Checker):
     def check(self, value):

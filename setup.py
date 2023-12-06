@@ -17,7 +17,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='0.1.5',
+	version='0.1.6',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
@@ -30,7 +30,7 @@ setup(
 	# Your name 
 	author='Aochuan Chen',
 	# Your email 
-	author_email='chenaoch@msu.edu',
+	author_email='phoveran@foxmail.com',
 	# Either the link to your github or to your website 
 	url='https://github.com/Phoveran/fastargs',
 	# Link from which the project can be downloaded 
